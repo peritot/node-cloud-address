@@ -1,47 +1,8 @@
-// Depends on tencentcloud-sdk-nodejs version 4.0.3 or higher
-const tencentcloud = require("tencentcloud-sdk-nodejs");
-const publicIp = require("public-ip");
+require("dotenv").config();
 const moment = require("moment");
-const log4js = require("log4js");
-
-const clientConfig = {
-  credential: {
-    secretId: "",
-    secretKey: "",
-  },
-  region: "ap-shanghai",
-  profile: {
-    httpProfile: {
-      endpoint: "vpc.tencentcloudapi.com",
-    },
-  },
-};
-const VpcClient = tencentcloud.vpc.v20170312.Client;
-const client = new VpcClient(clientConfig);
-
-log4js.configure({
-  "appenders": {
-    "file": {
-      "type": "file",
-      "filename": "logs/app.log",
-      "maxLogSize": 10485760,
-      "numBackups": 5,
-      "compress": false,
-      "encoding": "utf-8",
-      "layout": {
-        "type": "pattern",
-        "pattern": "[%d] [%p] ｜ %m"
-      }
-    }
-  },
-  "categories": {
-    "default": {
-      "appenders": ["file"],
-      "level": "debug"
-    }
-  }
-});
-const logger = log4js.getLogger("cheese");
+const publicIp = require("public-ip");
+const client = require("./utils/client");
+const logger = require("./utils/logger");
 
 const main = async () => {
   let ip;
@@ -58,8 +19,8 @@ const main = async () => {
       const time = moment().format("YY.MM.DD.HH");
       const params = {
         Addresses: [ip, time],
-        AddressTemplateId: "templateId",
-        AddressTemplateName: "templateName",
+        AddressTemplateId: process.env.ADDRESS_TEMPLATE_ID,
+        AddressTemplateName: process.env.ADDRESS_TEMPLATE_NAME,
       };
       const data = await client.ModifyAddressTemplateAttribute(params);
 
