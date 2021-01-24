@@ -1,0 +1,17 @@
+{
+  "name": "node-cloud-address",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "log4js": "^6.3.0",
+    "moment": "^2.29.1",
+    "public-ip": "^4.0.2",
+    "tencentcloud-sdk-nodejs": "^4.0.14"
+  }
+}
