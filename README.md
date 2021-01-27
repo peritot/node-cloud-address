@@ -25,5 +25,5 @@ $ crontab -e
 ```bash
 # /etc/cron
 
-30 1 * * * cd ~/workspace/node-cloud-address && ./app.sh >/dev/null 2>&1
+30 1 * * * cd ~/workspace/node/node-cloud-address && sh app.sh >/dev/null 2>&1
 ```

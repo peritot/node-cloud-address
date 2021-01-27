@@ -1,10 +1,13 @@
+const path = require("path");
 const log4js = require("log4js");
+
+const filename = path.resolve(__dirname, "../logs/app.log");
 
 log4js.configure({
   appenders: {
     file: {
       type: "file",
-      filename: "logs/app.log",
+      filename: filename,
       maxLogSize: 10485760,
       numBackups: 5,
       compress: false,
